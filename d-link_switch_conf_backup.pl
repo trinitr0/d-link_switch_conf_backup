@@ -5,11 +5,11 @@ use DBI;
 use strict;
 
 my $ip;
-my $name = 'sa';
-my $pass = 'cmIFyC89';
+my $name = 'admin';
+my $pass = 'password';
 
-my $qry = ("SELECT ip FROM computers WHERE unit_id='76' ORDER BY ip");
-my $dbh = DBI -> connect ("DBI:Pg:dbname=info user=info_bckp_switch host=10.0.0.4 password=ofra2000HaZA");
+my $qry = ("SELECT ip FROM switchs ORDER BY ip");
+my $dbh = DBI -> connect ("DBI:Pg:dbname=info user=bckp_switch host=1.2.3.4 password=password");
 my $sth = $dbh -> prepare($qry);
 my $rv = $sth -> execute();
 
@@ -91,7 +91,7 @@ sub getconf {
 	while(<IF>)
 	{
 	    s/create account admin sa//g;
-	    s/11388019//g;
+	    s/password//g;
 	    print OF $_;
 	}
 
@@ -101,7 +101,8 @@ sub getconf {
         rename "/var/tftp/$file_name", "/var/tftp/$file_name.bkp";
         rename "/var/tftp/$file_name.tmp", "/var/tftp/$file_name";
         unlink "/var/tftp/$file_name.bkp";
-
+	
+	    #insert data 	
 	    $date = `date +%d-%m-%Y--%H-%M`;
 	    open(IF, ">> /var/tftp/$file_name") or die $!;
 	    print IF "\n#$date";
