@@ -7,11 +7,8 @@ use DBI;
 require "GetConf.pm";
 
 my $ip;
-my $name = 'sa';
-my $pass = 'cmIFyC89';
-
-my $qry = ("SELECT ip FROM computers WHERE unit_id='76' ORDER BY ip");
-my $dbh = DBI -> connect ("DBI:Pg:dbname=info user=info_bckp_switch host=10.0.0.4 password=ofra2000HaZA");
+my $qry = ("SELECT ip FROM bd_switches ORDER BY ip");
+my $dbh = DBI -> connect ("DBI:Pg:dbname=info user=USER_ON_BD host=IP_BD password=PASSWORD_CONNECT_TO_BD");
 my $sth = $dbh -> prepare($qry);
 my $rv = $sth -> execute();
 
